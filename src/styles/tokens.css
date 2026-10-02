@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Design tokens — Matte Obsidian (DRS §2)
+   Profundidade apenas por escalonamento de cinzas + bordas translúcidas finas.
+   Sem gradientes, brilhos, neon ou sombras pesadas.
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+
+  /* Superfícies */
+  --bg-base: #0D1117;
+  --bg-surface: #161B22;
+  --bg-surface-hover: #1F242C;
+  --bg-inset: #0F141A;
+
+  /* Bordas */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: #30363D;
+
+  /* Tipografia */
+  --text-primary: #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-muted: #484F58; /* somente placeholders/decoração — não atinge AA para texto */
+
+  /* Semântica */
+  --positive: #3FB950;
+  --negative: #F85149;
+  --chart-line: #E6EDF3;
+  --focus-ring: rgba(230, 237, 243, 0.55);
+
+  /* Forma e espaçamento */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --sidebar-w: 248px;
+  --topbar-h: 56px;
+  --bottomnav-h: 60px;
+
+  --font-sans: 'Inter', 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.625rem;
+
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  /* Hover: duração mais longa e curva suave (ease-out) para transições tranquilas */
+  --hover-dur: 320ms;
+  --hover-ease: cubic-bezier(0.25, 0.8, 0.35, 1);
+}

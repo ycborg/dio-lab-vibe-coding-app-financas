@@ -1,0 +1,11 @@
+# Dependências e build (o build é gerado na publicação)
+node_modules/
+dist/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Configurações locais do Claude Code
+.claude/

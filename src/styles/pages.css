@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Estilos específicos de páginas
+   ========================================================================== */
+
+/* ---------- Visão geral (RF02) ---------- */
+.overview-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+@media (min-width: 1440px) {
+  .overview-grid { grid-template-columns: minmax(0, 1.75fr) minmax(360px, 1fr); gap: var(--space-6); align-items: start; }
+}
+
+/* ---------- Transações (RF03) ---------- */
+.filters { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); }
+.filters__search { position: relative; }
+.filters__search .input { padding-left: 36px; }
+.filters__search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); pointer-events: none; }
+.filters__row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.filters__field { flex: 1 1 220px; max-width: 280px; }
+.filters__period { display: flex; gap: var(--space-2); flex: 1 1 300px; min-width: 0; }
+.filters__period > .filters__granularity { flex: 0 0 160px; }
+.filters__period > .input:not(.filters__granularity) { flex: 1; min-width: 0; }
+
+@media (max-width: 767px) {
+  .filters__row > .segmented { width: 100%; }
+  .filters__row > .segmented .segmented__item { flex: 1; }
+  .filters__field { max-width: none; flex-basis: 100%; }
+  .filters__period { flex-basis: 100%; }
+  .filters__period > .filters__granularity { flex: 0 0 128px; }
+}
+
+.results-bar {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-4);
+  padding: 0 4px;
+  font-size: var(--text-sm); color: var(--text-secondary);
+}
+.results-bar strong { color: var(--text-primary); }
+.results-bar__totals { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.results-bar__totals > span:last-child { color: var(--text-primary); }
+
+.day-groups { display: flex; flex-direction: column; gap: var(--space-5); }
+.day-group__title { margin: 0 4px var(--space-2); font-size: var(--text-xs); font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ---------- Calendário (RF04) ---------- */
+.cal-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+.cal-nav { display: flex; align-items: center; gap: var(--space-1); }
+.cal-nav__title { min-width: 168px; text-align: center; font-size: var(--text-lg); font-weight: 600; }
+.cal-summary { display: flex; gap: var(--space-5); }
+.cal-summary div { display: flex; flex-direction: column; }
+.cal-summary dt { font-size: var(--text-xs); color: var(--text-secondary); }
+.cal-summary dd { font-weight: 600; }
+
+.cal-grid { display: flex; flex-direction: column; gap: 4px; }
+.cal-grid__row { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.cal-weekday { padding: 4px 8px; font-size: var(--text-xs); font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+.cal-grid__row > [role='gridcell'] { min-width: 0; }
+
+.cal-day {
+  position: relative;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  width: 100%; min-height: 92px;
+  padding: 8px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  text-align: left; color: var(--text-primary);
+  transition: background-color var(--hover-dur) var(--hover-ease), border-color var(--hover-dur) var(--hover-ease), opacity var(--hover-dur) var(--hover-ease);
+}
+button.cal-day:hover { background: var(--bg-surface-hover); border-color: var(--border-strong); }
+.cal-day--empty { background: transparent; border-color: transparent; min-height: 92px; }
+.cal-day--l1 { background: #12171E; }
+.cal-day--l2 { background: #151B22; }
+.cal-day--l3 { background: #19202A; }
+.cal-day.is-today { border-color: var(--text-secondary); }
+/* Dias dos meses vizinhos: ofuscados, mas ainda clicáveis */
+.cal-day.is-outside { background: transparent; border-color: rgba(255, 255, 255, 0.04); opacity: 0.4; }
+button.cal-day.is-outside:hover { opacity: 0.75; background: var(--bg-inset); }
+.cal-day__num { font-size: var(--text-sm); font-weight: 500; color: var(--text-secondary); }
+.cal-day.is-today .cal-day__num { color: var(--text-primary); font-weight: 600; }
+.cal-day__net { margin-top: auto; font-size: var(--text-xs); font-weight: 600; white-space: nowrap; max-width: 100%; overflow: hidden; }
+.cal-day__net-compact { display: none; }
+.cal-day__density { display: flex; align-items: center; gap: 3px; }
+.cal-day__density i, .cal-legend__dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--text-secondary); }
+.cal-day__count { margin-left: 3px; font-size: 0.6875rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.cal-legend { display: flex; align-items: center; gap: 8px; margin-top: var(--space-3); font-size: var(--text-xs); color: var(--text-secondary); }
+.cal-legend__dots { display: inline-flex; gap: 3px; }
+
+/* Saldo diário completo não cabe em células estreitas: troca pelo formato compacto */
+@media (max-width: 1279px) {
+  .cal-day__net-full { display: none; }
+  .cal-day__net-compact { display: inline; }
+}
+@media (max-width: 767px) {
+  .cal-grid, .cal-grid__row { gap: 2px; }
+  .cal-day, .cal-day--empty { min-height: 64px; padding: 5px; }
+  .cal-weekday { padding: 4px 2px; text-align: center; font-size: 0.625rem; }
+  .cal-day__count { display: none; }
+  .cal-day__net { font-size: 0.625rem; }
+  .cal-nav__title { min-width: 0; font-size: var(--text-md); }
+  .cal-summary { width: 100%; justify-content: space-between; }
+}
+@media (max-width: 379px) {
+  .cal-day__density i:nth-child(n + 3) { display: none; }
+}
+
+.drawer-totals { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.drawer-totals > span:last-child { color: var(--text-primary); }
+
+/* ---------- Categorias (RF05) ---------- */
+.categories-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); align-items: center; }
+@media (min-width: 900px) {
+  .categories-layout { grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); gap: var(--space-8); align-items: start; }
+}
+.cat-list { display: flex; flex-direction: column; gap: 4px; }
+.cat-row { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: var(--radius-sm); transition: background-color var(--hover-dur) var(--hover-ease), opacity var(--hover-dur) var(--hover-ease); }
+.cat-row.is-active { background: var(--bg-surface-hover); }
+.cat-row.is-dim { opacity: 0.55; }
+.cat-row__head, .cat-row__meta { display: flex; justify-content: space-between; gap: var(--space-3); }
+.cat-row__name { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+.cat-row__value { font-weight: 600; white-space: nowrap; }
+.cat-row__meta { font-size: var(--text-xs); color: var(--text-secondary); }
+
+/* ---------- Chat (RF06) ---------- */
+/* Tela cheia: cabeçalho fixo no topo, histórico rolável e compositor no rodapé.
+   O conteúdo é centralizado numa coluna de leitura confortável. */
+.main__inner--flush { max-width: none; padding: 0 !important; gap: 0 !important; }
+.chat-screen {
+  position: relative;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  height: 100vh; height: 100dvh;
+}
+@media (max-width: 1023px) {
+  .chat-screen { height: calc(100dvh - var(--topbar-h) - var(--bottomnav-h) - env(safe-area-inset-bottom, 0px)); }
+}
+
+.chat-screen__column { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 var(--space-6); }
+.chat-screen__header { flex-shrink: 0; border-bottom: 1px solid var(--border-subtle); background: var(--bg-base); }
+.chat-screen__header-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.chat-screen__identity { display: flex; align-items: center; gap: var(--space-3); }
+.chat-screen__avatar {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+}
+.chat-screen__name { font-size: var(--text-lg); font-weight: 600; line-height: 1.2; }
+.chat-screen__role { font-size: var(--text-xs); color: var(--text-secondary); }
+
+/* `position: relative` contém os textos .sr-only (absolutos) dos cards; sem isso eles
+   "vazavam" para o documento e criavam uma segunda barra de rolagem na página. */
+.chat-screen__log { position: relative; flex: 1; min-height: 0; overflow-y: auto; }
+.chat-screen__messages {
+  display: flex; flex-direction: column; gap: var(--space-5);
+  padding-top: var(--space-6);
+  /* Espaço para a última mensagem não ficar escondida sob a barra de digitação */
+  padding-bottom: calc(var(--composer-h, 140px) + var(--space-4));
+}
+
+/* Barra de digitação flutuante: as mensagens rolam por trás dela, com um esmaecimento suave */
+.chat-screen__history { align-self: center; font-size: var(--text-xs); color: var(--text-secondary); padding: var(--space-1) 0; }
+
+.chat-screen__footer {
+  position: absolute; left: 0; bottom: 0;
+  right: var(--scrollbar-w, 0px);
+  padding-top: var(--space-6);
+  background: linear-gradient(to bottom, rgba(13, 17, 23, 0) 0, rgba(13, 17, 23, 0.85) 36px, var(--bg-base) 100%);
+  pointer-events: none;
+}
+.chat-screen__footer > * { pointer-events: auto; }
+.chat-screen__footer .chip { background: var(--bg-base); }
+
+@media (max-width: 559px) {
+  .chat-screen__column { padding: 0 var(--space-4); }
+  .chat-screen__header-inner { padding-top: var(--space-3); padding-bottom: var(--space-3); }
+  .chat-screen__messages { padding-top: var(--space-4); padding-bottom: var(--space-4); gap: var(--space-4); }
+}
+
+.msg { display: flex; gap: var(--space-3); max-width: 720px; }
+.msg--user { align-self: flex-end; justify-content: flex-end; }
+.msg__avatar { display: grid; place-items: center; flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--bg-surface-hover); border: 1px solid var(--border-subtle); color: var(--text-secondary); }
+.msg__content { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.msg__bubble {
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.msg--assistant .msg__bubble { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-top-left-radius: 4px; }
+.msg--user .msg__bubble { background: var(--bg-surface-hover); border: 1px solid var(--border-strong); border-top-right-radius: 4px; }
+
+.msg__typing { display: inline-flex; gap: 4px; align-items: center; min-height: 40px; }
+.msg__typing span:not(.sr-only) { width: 6px; height: 6px; border-radius: 50%; background: var(--text-secondary); animation: blink 1.2s infinite ease-in-out; }
+.msg__typing span:nth-child(2) { animation-delay: 0.15s; }
+.msg__typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+
+.preview {
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+.preview--confirmed { border-style: solid; border-color: rgba(63, 185, 80, 0.35); }
+.preview--cancelled { opacity: 0.55; }
+.preview__comment { font-size: var(--text-md); color: var(--text-primary); }
+.preview__total { margin-top: calc(var(--space-1) * -1); font-size: var(--text-xs); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.preview__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-2); }
+.preview__status { font-size: var(--text-sm); font-weight: 500; color: var(--text-secondary); }
+
+.chat__suggestions { display: flex; gap: var(--space-2); overflow-x: auto; scrollbar-width: none; padding-top: var(--space-3); }
+.chat__composer { display: flex; gap: var(--space-2); align-items: flex-end; padding: var(--space-3) 0 var(--space-5); }
+.chat__composer .chat__input { background: var(--bg-surface); }
+.chat__input { min-height: 42px; max-height: 140px; field-sizing: content; }
+.chat__send { width: 42px; min-height: 42px; padding: 0; flex-shrink: 0; }
+
+@media (max-width: 559px) { .chat__composer { padding-bottom: var(--space-4); } }
