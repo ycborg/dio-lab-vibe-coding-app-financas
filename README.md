@@ -196,15 +196,13 @@ Acesse o app publicado no GitHub Pages:
 
 Tour pela Visão Geral, filtros de transações e registro de uma despesa pelo chat com o Fin.
 
-<!-- Para virar player: no editor do GitHub, arraste docs/media/demo-desktop.mp4 para esta linha -->
-[▶️ Assistir à demonstração no desktop](docs/media/demo-desktop.mp4)
+https://github.com/user-attachments/assets/0d4c2e1e-2c7b-4eea-927f-e36c6fcfba55
 
 ### 📱 Mobile
 
 Navegação pela barra inferior, novo lançamento com seletor de categorias, donut de gastos e chat com o Fin.
 
-<!-- Para virar player: no editor do GitHub, arraste docs/media/demo-mobile.mp4 para esta linha -->
-[▶️ Assistir à demonstração no mobile](docs/media/demo-mobile.mp4)
+https://github.com/user-attachments/assets/6729e1e6-42cd-432e-a7d3-b6f9974e9e3e
 
 ---
 
